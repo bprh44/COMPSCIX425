@@ -26,8 +26,9 @@ function updateDisplay() {
     //     displayDiv.innerHTML = expression + faux;
     // } 
     else {
+        displayedExpression = expression.replace('*', 'x');
+        displayedExpression = displayedExpression.replace('/', '÷');
         displayDiv.innerHTML = displayedExpression;
-        displayDiv.innerHTML = expression;
     }
 }
 
@@ -79,7 +80,6 @@ function loadResult() {
     updateDisplay();
 }
 
-
 /*
    Appends the current expression to the "receipt" below the calculator
 */
@@ -91,7 +91,7 @@ function addToReceipt() {
     }
     else {
         console.log(111);
-        receiptDiv.innerHTML += `${expression} = ${result} <br />`;
+        receiptDiv.innerHTML += `${displayedExpression} = ${result} <br />`;
     }
 }
 
