@@ -1,54 +1,107 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Calculator</title>
-    <link rel="stylesheet" href="./static/css/App.css" />
-    <link rel="stylesheet" href="./static/css/Button.css" />
-    <link rel="stylesheet" href="./static/css/Calculator.css" />
-    <link rel="stylesheet" href="./static/css/Receipt.css" />
-    <script defer src="./static/js/utils.js"></script>
-    <script defer src="./static/js/main.js"></script>
-</head>
-<body>
-    <div class="App" id="app">
-        <div class="Receipt Receipt--error" id="error">&nbsp;</div>
-        <div class="Calculator">
-            <div class="Calculator-upperDisplay">JavaScript Calc</div>
-            <div class="Calculator-display" id="display">&nbsp;</div>
-            <div class="Calculator-extraOperations">
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('')">x²</button>
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('')">x³</button>
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('%', '%')">%</button>
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('')">‰</button>
-            </div>
-            <div class="Calculator-extraOperations">
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('/', '÷')">÷</button>
-              <button class="Button Button--yellow" onclick="typeSpecialSymbol('*', 'x')">×</button>
-              <button class="Button Button--yellow" onclick="typeSymbol('-')">-</button>
-              <button class="Button Button--yellow" onclick="typeSymbol('+')">+</button>
-            </div>
-            <div class="Calculator-keypad">
-              <button class="Button" onclick="typeSymbol(9)">9</button>
-              <button class="Button" onclick="typeSymbol(8)">8</button>
-              <button class="Button" onclick="typeSymbol(7)">7</button>
-              <button class="Button" onclick="typeSymbol(6)">6</button>
-              <button class="Button" onclick="typeSymbol(5)">5</button>
-              <button class="Button" onclick="typeSymbol(4)">4</button>
-              <button class="Button" onclick="typeSymbol(3)">3</button>
-              <button class="Button" onclick="typeSymbol(2)">2</button>
-              <button class="Button" onclick="typeSymbol(1)">1</button>
-              <button class="Button" onclick="typeSymbol(0)">0</button>
-              <button class="Button" onclick="typeSymbol('.')"">.</button>
-              <button class="Button Button--red" onclick="clearExpression()">RSLT</button>
-            </div>
-            <div class="Calculator-operations">
-              <button class="Button Button--red" onclick="backspace()">⌫</button>
-              <button class="Button Button--red" onclick="clearExpression()">CLR</button>
-              <button class="Button Button--green" style="grid-row: 3 / span 2; height: 139px; font-size: 50px" onclick="execute()">⏎ </button>
-            </div>
-        </div>
-        <div class="Receipt"  id="receipt_contents">
-        </div>
-     </div>
-</body>
-</html>
+
+// Note: Two basic functions are here for you to examine.
+// Open the Console to see the results.
+function pressTwo() {
+    expression = expression + '2';
+    console.log('Two was pressed. New expression:', expression);
+    updateDisplay();
+}
+
+function pressTimes() {
+    expression = expression + '*';
+    console.log('Times was pressed. New expression:', expression);
+    updateDisplay();
+}
+
+/*
+   Updates the calculator display
+*/
+function updateDisplay() {
+    let displayDiv = document.querySelector('#display')
+
+    if(expression === "" ) {
+        displayDiv.innerHTML = "&nbsp;";
+    }
+    // else if(faux != "") {
+    //     displayDiv.innerHTML = expression + faux;
+    // } 
+    else {
+        displayedExpression = expression.replace('*', 'x');
+        displayedExpression = displayedExpression.replace('/', '÷');
+        displayDiv.innerHTML = displayedExpression;
+    }
+}
+
+/*
+   Deletes the last typed character
+*/
+function backspace() {
+    console.log("Removing last from", expression);
+    expression = _removeLastCharacters(expression, 1);
+    console.log(expression);
+    updateDisplay();
+}
+
+/*
+   Clears what's typed
+*/
+function clearExpression() {
+    console.log("reseting!");
+    expression = "";
+    updateDisplay();
+}
+
+/*
+   Adds one symbol to the expression
+*/
+function typeSymbol(symbol) {
+    expression = expression.concat(symbol);
+    console.log(symbol, " was pressed. New expression: : " , expression);
+    updateDisplay();
+}
+
+/*
+   Adds one symbol to the expression, but with a different user-visible label
+*/
+function typeSpecialSymbol(symbol, label) {
+    console.log(label, " was pressed");
+    expression = expression.concat(symbol);
+    displayedExpression = displayedExpression.concat(label);
+    console.log("exp: ", expression);
+    console.log("dis: ", displayedExpression);
+    updateDisplay();
+}
+
+/*
+   Loads the numeric result of the last computation into the expression
+*/
+function loadResult() {
+    expression = eval(expression);
+    updateDisplay();
+}
+
+/*
+   Appends the current expression to the "receipt" below the calculator
+*/
+function addToReceipt() {
+    let receiptDiv = document.querySelector('#receipt_contents');
+    if (receiptDiv.innerHTML.length <= 40) {
+        receiptDiv.innerHTML = receipt + "<br />";
+        console.log(receiptDiv.textContent.length);
+    }
+    else {
+        console.log(111);
+        receiptDiv.innerHTML += `${displayedExpression} = ${result} <br />`;
+    }
+}
+
+/*
+   Display error message to screen
+*/
+function showError(message) {
+    console.log("ShowError");
+    let errorDiv = document.querySelector('#error');
+    errorDiv.innerHTML = message;
+}
+
+addToReceipt(); // Call right away to show the default message
