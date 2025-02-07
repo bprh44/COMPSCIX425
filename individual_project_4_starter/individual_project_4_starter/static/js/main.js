@@ -6,59 +6,77 @@ function pressTwo() {
     console.log('Two was pressed. New expression:', expression);
     updateDisplay();
 }
+
 function pressTimes() {
     expression = expression + '*';
     console.log('Times was pressed. New expression:', expression);
     updateDisplay();
 }
 
-
-/* ***************************************** */
-// The following is the function structure of the solution.
-// Feel free to use this as a guide, or change it to your own!
-
 /*
    Updates the calculator display
 */
 function updateDisplay() {
     let displayDiv = document.querySelector('#display')
-    // Hint: Will eventually need changes!
-    displayDiv.innerHTML = expression;
+
+    if(expression === "" ) {
+        displayDiv.innerHTML = "&nbsp;";
+    }
+    // else if(faux != "") {
+    //     displayDiv.innerHTML = expression + faux;
+    // } 
+    else {
+        displayDiv.innerHTML = displayedExpression;
+        displayDiv.innerHTML = expression;
+    }
 }
 
 /*
    Deletes the last typed character
 */
 function backspace() {
-    // TODO: Fill this in!
+    console.log("Removing last from", expression);
+    expression = _removeLastCharacters(expression, 1);
+    console.log(expression);
+    updateDisplay();
 }
 
 /*
    Clears what's typed
 */
 function clearExpression() {
-    // TODO: Fill this in!
+    console.log("reseting!");
+    expression = "";
+    updateDisplay();
 }
 
 /*
    Adds one symbol to the expression
 */
 function typeSymbol(symbol) {
-    // TODO: Fill this in!
+    expression = expression.concat(symbol);
+    console.log(symbol, " was pressed. New expression: : " , expression);
+    updateDisplay();
 }
 
 /*
    Adds one symbol to the expression, but with a different user-visible label
 */
 function typeSpecialSymbol(symbol, label) {
-    // TODO: Fill this in!
+    console.log(label, " was pressed");
+    expression = expression.concat(symbol);
+    displayedExpression = displayedExpression.concat(label);
+    console.log("exp: ", expression);
+    console.log("dis: ", displayedExpression);
+    updateDisplay();
 }
 
 /*
    Loads the numeric result of the last computation into the expression
 */
 function loadResult() {
-    // TODO: Fill this in!
+    expression = eval(expression);
+    updateDisplay();
 }
 
 
@@ -66,16 +84,24 @@ function loadResult() {
    Appends the current expression to the "receipt" below the calculator
 */
 function addToReceipt() {
-    let receiptDiv = document.querySelector('#receipt_contents')
-    // TODO: Fill this in!
-    receiptDiv.innerHTML = receipt;
+    let receiptDiv = document.querySelector('#receipt_contents');
+    if (receiptDiv.innerHTML.length <= 40) {
+        receiptDiv.innerHTML = receipt + "<br />";
+        console.log(receiptDiv.textContent.length);
+    }
+    else {
+        console.log(111);
+        receiptDiv.innerHTML += `${expression} = ${result} <br />`;
+    }
 }
 
 /*
    Display error message to screen
 */
 function showError(message) {
-    // TODO: Fill this in!
+    console.log("ShowError");
+    let errorDiv = document.querySelector('#error');
+    errorDiv.innerHTML = message;
 }
 
 addToReceipt(); // Call right away to show the default message
