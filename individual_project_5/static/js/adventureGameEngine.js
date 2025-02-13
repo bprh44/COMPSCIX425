@@ -80,10 +80,10 @@ function setupPerson(person) {
     console.log('dialog2:', person.dialog2);
 
     // Give a little warning to make it easier to use
-    if (!('afterClicking' in person)) { // !() inverts, and "in" checks for properties in objects
-        console.log('afterClicking method:', 'Uh oh, this person needs a method! Add a method called "afterClicking"');
+    if (!('afterTalking' in person)) { // !() inverts, and "in" checks for properties in objects
+        console.log('afterTalking method:', 'Uh oh, this person needs a method! Add a method called "afterTalking"');
     } else {
-        console.log('afterClicking method:', person.afterClicking);
+        console.log('afterTalking method:', person.afterTalking);
     }
 
     // Attach the "showDialog" method (appends the person's dialog to given selector)
