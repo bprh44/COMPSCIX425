@@ -14,7 +14,7 @@ let totalPages = 0;
 */
 function doFetch() {
     // TODO: This function will need some updating...
-    const url = `http://openlibrary.org/search.json?q=${query}&limit=10&offset=${page}`;
+    const url = `https://openlibrary.org/search.json?q=${query}&limit=10&offset=${page}`;
     console.log('making query to ', url);
     isLoading = true;
     render();
