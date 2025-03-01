@@ -62,7 +62,7 @@ function render() {
     console.log("rendering", isLoading, books);
     let bookDiv = document.querySelector('#books_div');
     let pagesSpan = document.querySelector('#pages_span');
-    pagesSpan.textContent = '0 / 1';
+    pagesSpan.textContent = `${page + 1} of ${totalPages + 1}`;
     if (isLoading) {
         bookDiv.innerHTML = '<div class="loader">Loading...</div>';
     } 
@@ -75,7 +75,7 @@ function render() {
                 <div class="Books-book-details">
                     <div class="Books-book-title">${book['title']}</div>
                     <strong>Author:</strong> ${book['author_name']}<br>
-                    <strong>Language:</strong> ${book['language']}<br>
+                    <strong>Language:</strong> <span style="display: inline-block; max-width: 100%; overflow-wrap: break-word;">${book['language'] ? book['language'].join(', ') : 'N/A'}</span><br>
                     <strong>Year Published:</strong> ${book['first_publish_year']}<br>
                 </div>
             </div>`;
