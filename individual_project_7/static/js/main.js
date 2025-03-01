@@ -45,6 +45,9 @@ function onSearch() {
 // TODO: This function will need some updating...
 function decrementPage() { 
     page--;
+    if (page < 0) {
+        page = 0;
+    }
     doFetch();
 }
 
