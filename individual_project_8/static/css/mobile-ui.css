@@ -11,21 +11,40 @@
   
 */
 
-
-
+/* Default desktop */
 .Products {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
+/* large tablet */
+@media (max-width: 1100px) {
+    .Products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
-/* Modal-window has already been tweaked to look better on mobile: */
+/* small tablet */
+@media (max-width: 900px) {
+    .Products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* mobile */
 @media (max-width: 600px) {
-    .Modal-window {
-        /* Prevent text overflow by shrinking font */
-        font-size: 1.4rem;
-        text-align: left;
-        left: 0;
+    .Products {
+        grid-template-columns: 1fr;
     }
 }
 
 /* TODO: Add extra styling, if needed for hamburger menu */
+.hamburger {
+    display: none; 
+}
+
+@media (max-width: 900px) {
+    .hamburger {
+        display: block; /* Show hamburger menu */
+    }
+}
