@@ -80,7 +80,7 @@ function renderProduct(product) {
             ${ product.rating }
         </div>
         <div class="Item-imageWrapper">
-          <img src="${ product.images[0] }" />
+          <img src="${ product.thumbnail }" />
         </div>
         <div class="Item-details">
           <div class="Item-button" onclick="addToCart(${ product.price })">
