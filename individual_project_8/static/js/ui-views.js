@@ -76,14 +76,14 @@ function renderProduct(product) {
     div.setAttribute('class', 'Item'); // Ensure gets 'Item' class
     div.innerHTML = `
         <div class="Item-rating">
-            <span role="img" aria-label="Starred Review Rating">&#11088;</span>;
+            <span role="img" aria-label="Starred Review Rating">&#11088;</span>
             ${ product.rating }
         </div>
         <div class="Item-imageWrapper">
           <img src="${ product.thumbnail }" />
         </div>
         <div class="Item-details">
-          <div class="Item-button" onclick="addToCart(${ product.price })">
+          <div class="Item-button" role="button" tabindex="0" onclick="addToCart(${ product.price })">
               <span role="img" aria-label="Add to Cart">&#128722;</span>
               \$${ product.price }
           </div>
